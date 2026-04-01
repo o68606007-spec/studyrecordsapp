@@ -20,7 +20,7 @@ export const Dialogs: FC<Props> = memo((prop) => {
     const { onAdd, open, setOpen, initialData } = prop
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
 
-    const onOpenChange = (event) => {
+    const onOpenChange = (event: { open: boolean }) => {
         setOpen(event.open);
     }
     const onSubmit = useCallback(async (data: FormValues) => {
@@ -59,10 +59,10 @@ export const Dialogs: FC<Props> = memo((prop) => {
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Portal>
             <Dialog.Backdrop />
-            <Dialog.Positioner>
-                <Dialog.Content as="form" onSubmit={handleSubmit(onSubmit)}>
+            <Dialog.Positioner {...({} as any)}>
+                <Dialog.Content as="form" onSubmit={handleSubmit(onSubmit)} {...({} as any)}>
                     <Dialog.Header>
-                        <Dialog.Title data-testid="add-title">{initialData ? "記録編集": "新規学習記録"}</Dialog.Title>
+                        <Dialog.Title data-testid="add-title" {...({} as any)}>{initialData ? "記録編集": "新規学習記録"}</Dialog.Title>
                     </Dialog.Header>
                     <Dialog.Body>
                         <Group attached w="fall" maxW="lg">
@@ -78,7 +78,7 @@ export const Dialogs: FC<Props> = memo((prop) => {
                             <Button colorScheme="teal" width="100px">キャンセル</Button>
                         </Dialog.ActionTrigger>                            
                     </Dialog.Footer>
-                    <Dialog.CloseTrigger asChild>
+                    <Dialog.CloseTrigger asChild {...({} as any)}>
                         <CloseButton size="sm" />
                     </Dialog.CloseTrigger>
                 </Dialog.Content>
