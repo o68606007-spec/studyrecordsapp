@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
+      - run: cp -r dist/* public/
         # 以下を追加
         env:
           VITE_SUPABASE_URL: ${{secrets.VITE_SUPABASE_URL}}
