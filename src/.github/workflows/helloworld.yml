@@ -1,52 +1,52 @@
-name: Hello World
+# name: Hello World
 
-on:
-  push:
-  workflow_dispatch:
+# on:
+#   push:
+#   workflow_dispatch:
 
-jobs:
-  build:
-    name: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - name: Install dependencies
-        run: npm install
+# jobs:
+#   build:
+#     name: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "22"
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Run test (CI)
-        run: npm test
+#       - name: Run test (CI)
+#         run: npm test
 
-      - name: Run build
-        run: npm run build
+#       - name: Run build
+#         run: npm run build
 
-      ##ビルドでできた dist フォルダをデプロイで使えるように保存
-      - name: Upload build-artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist
+#       ##ビルドでできた dist フォルダをデプロイで使えるように保存
+#       - name: Upload build-artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: build-artifacts
+#           path: dist
 
-  deploy:
-    name: deploy
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Nod e.js and cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
+#   deploy:
+#     name: deploy
+#     runs-on: ubuntu-latest
+#     needs: build
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#       - name: Setup Nod e.js and cache
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "18"
+#           cache: "npm"
 
-      ## ビルドジョブで生成＆保存されたdistフォルダを取得
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist
+#       ## ビルドジョブで生成＆保存されたdistフォルダを取得
+#       - name: Download build artifacts
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: build-artifacts
+#           path: dist
